@@ -34,9 +34,6 @@
     <QtUic Include="Remote.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtMoc Include="Remote.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <ClCompile Include="Remote.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -107,6 +104,9 @@
   <ItemGroup>
     <QtMoc Include="WidgetServerSet.h">
       <Filter>本地设置管理对话框</Filter>
+    </QtMoc>
+    <QtMoc Include="Remote.h">
+      <Filter>Source Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

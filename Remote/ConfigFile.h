@@ -1,6 +1,4 @@
 #pragma once
-
-#include<Windows.h>
 #include<qsettings.h>
 #include <qfile.h>
 
@@ -12,8 +10,8 @@ public:
 
 	bool initConfigFile();
 
-	int GetInt(QString MainKey, QString SubKey);
-	void SetInt(QString MainKey, QString SubKey, int BufferData);
+	unsigned int GetInt(QString MainKey, QString SubKey);
+	void SetInt(QString MainKey, QString SubKey, unsigned int BufferData);
 
 private:
 	std::string m_FileFullPath;       //配置文件的绝对路径

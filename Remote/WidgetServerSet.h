@@ -18,14 +18,10 @@ public:
 	void onButtonApply();
 
 
-
-public:
-
-	static ConfigFile m_ConfigFile;
 private:
 	Ui::WidgetServerSetClass ui;
 	QPushButton* Button_ServerSet_Apply;
 
-	int ListenPort;
-	int MaxConnection;
+	unsigned short ListenPort;
+	unsigned int MaxConnection;
 };

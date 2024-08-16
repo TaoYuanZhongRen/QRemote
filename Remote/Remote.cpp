@@ -1,12 +1,19 @@
 #include "Remote.h"
-
+#include "IOCPServer.h"
+#include "ConfigFile.h"
 
 #pragma execution_character_set("utf-8")
 
-long m_ConnectCount = 0;
+ulong m_ConnectCount = 0;
+//定义全局通信对象
+IOCPServer* g_IOCPServer = NULL;
 
-Remote::Remote(QWidget *parent)
-    : QMainWindow(parent)
+//定义全局文件配置对象
+ConfigFile g_ConfigFile;
+
+
+
+Remote::Remote(QWidget* parent) : QMainWindow(parent)
 {
     ui.setupUi(this);
 	this->setWindowIcon(QIcon(".\\PicRes\\Remote"));
@@ -15,14 +22,21 @@ Remote::Remote(QWidget *parent)
 	initChildPointer();
 	initListWidget();
 	initMenu();
-	initStatusBar();
+	initStatusBar(); 
 	initToolBar();
+
+	m_ListenPort = g_ConfigFile.GetInt("Settings", "ListenPort");
+	m_MaxConnectCount = g_ConfigFile.GetInt("Settings", "MaxConnection");
+	ServerStart();
 
 	//CreateSystemTrayMenu();
 }
 
 Remote::~Remote()
-{}
+{
+	delete g_IOCPServer;
+	g_IOCPServer = NULL;
+}
 
 
 void Remote::initListWidget()
@@ -68,6 +82,22 @@ void Remote::initTableHeader()
 	m_TableWidget_Message->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
+void Remote::ServerStart()
+{
+	g_IOCPServer = new IOCPServer();
+	if (g_IOCPServer == NULL)
+	{
+		return;
+	}
+	if (g_IOCPServer->ServerRun(m_ListenPort) == true)
+	{
+
+	}
+	//窗口界面显示通信对象已经启动
+	ShowDialogMessage(true, QString("监听端口：%1成功").arg(m_ListenPort));
+
+}
+
 void Remote::onCreateServerSetWidget()
 {
 	m_Widget_Server_Set = new WidgetServerSet(this);
@@ -81,7 +111,6 @@ void Remote::onCreateServerSetWidget()
 void Remote::onTableWidgetSelectChanged()
 {
 	//todo 当鼠标点击空白地方的时候取消tablewidget中行的选中，但是目前还存在问题
-
 	int columnNum = m_TableWidget_Online->columnCount();
 	for (int i = 0; i < (m_TableWidget_Online->selectedItems().size())/ columnNum; i++)
 	{
@@ -245,7 +274,7 @@ void Remote::initToolBar()
 }
 void Remote::onToolButtonCmdManager()
 {
-	MessageBox("hello");
+	MMessageBox("111");
 }
 void Remote::onToolButtonProcessManager()
 {
@@ -314,7 +343,7 @@ void Remote::initChildPointer()
 
 	m_ToolBar = this->findChild<QToolBar*>(QString("mainToolBar"));
 }
-void Remote::MessageBox(QString message)
+void Remote::MMessageBox(QString message)
 {
 	QMessageBox a;
 	a.setText(message);

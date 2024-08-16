@@ -1,5 +1,5 @@
 #include "ConfigFile.h"
-
+#include "windows.h"
 
 ConfigFile::ConfigFile()
 {
@@ -73,7 +73,7 @@ bool ConfigFile::initConfigFile()
 
 
 
-int ConfigFile::GetInt(QString MainKey,QString SubKey)
+unsigned int ConfigFile::GetInt(QString MainKey,QString SubKey)
 {
 	QSettings configini(m_FileFullPath.c_str(), QSettings::IniFormat);
 	configini.beginGroup(MainKey);
@@ -81,7 +81,7 @@ int ConfigFile::GetInt(QString MainKey,QString SubKey)
 	configini.endGroup();
 	return value;
 }
-void ConfigFile::SetInt(QString MainKey, QString SubKey, int BufferData)
+void ConfigFile::SetInt(QString MainKey, QString SubKey, unsigned int BufferData)
 {
 	QSettings configini(m_FileFullPath.c_str(), QSettings::IniFormat);
 	configini.beginGroup(MainKey);

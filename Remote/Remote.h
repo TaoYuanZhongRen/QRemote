@@ -31,13 +31,14 @@ public:
 
     void initChildPointer();
 
-    void MessageBox(QString message);
+    void MMessageBox(QString message);
     
     void initListWidget();
 
     void initTableHeader();
 
-
+public:
+    void ServerStart();
 
 public slots:
     void onAddTest();
@@ -47,7 +48,6 @@ public slots:
 
     void onTableWidgetMenuDisConnect();
 
-    
     void onToolButtonCmdManager();
     void onToolButtonProcessManager();
     void onToolButtonWindowManager();
@@ -89,8 +89,12 @@ private:
 
     WidgetServerSet* m_Widget_Server_Set;
 
-
     QSystemTrayIcon* m_SystemTrayIcon;
     QMenu* m_TrayMenu;
     bool isClickFromTrayMenu = false;
+
+private:
+	unsigned short m_ListenPort;
+    unsigned int m_MaxConnectCount;
+
 };
