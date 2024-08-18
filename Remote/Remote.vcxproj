@@ -107,6 +107,7 @@
     <ClCompile Include="ConfigFile.cpp" />
     <ClCompile Include="IOCPServer.cpp" />
     <ClCompile Include="WidgetServerSet.cpp" />
+    <ClCompile Include="_CriticalSection.cpp" />
     <QtRcc Include="Remote.qrc" />
     <QtUic Include="Remote.ui" />
     <QtMoc Include="Remote.h" />
@@ -136,6 +137,7 @@
   <ItemGroup>
     <ClInclude Include="ConfigFile.h" />
     <ClInclude Include="IOCPServer.h" />
+    <ClInclude Include="_CriticalSection.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

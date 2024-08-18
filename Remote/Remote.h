@@ -11,7 +11,7 @@
 #include <qstandarditemmodel.h>
 #include <QSystemTrayIcon>  //tмпелюЮ
 #include <qtablewidget.h>
-#include <qtextcodec.h>.
+#include <qtextcodec.h>
 #include <QtWidgets/QMainWindow>
 #include <vector>
 

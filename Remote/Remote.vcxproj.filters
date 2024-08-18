@@ -51,6 +51,9 @@
     <ClCompile Include="IOCPServer.cpp">
       <Filter>通信引擎</Filter>
     </ClCompile>
+    <ClCompile Include="_CriticalSection.cpp">
+      <Filter>通信引擎</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="WidgetServerSet.ui">
@@ -114,6 +117,9 @@
       <Filter>本地设置管理对话框</Filter>
     </ClInclude>
     <ClInclude Include="IOCPServer.h">
+      <Filter>通信引擎</Filter>
+    </ClInclude>
+    <ClInclude Include="_CriticalSection.h">
       <Filter>通信引擎</Filter>
     </ClInclude>
   </ItemGroup>
