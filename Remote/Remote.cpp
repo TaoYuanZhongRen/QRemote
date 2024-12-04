@@ -5,10 +5,10 @@
 #pragma execution_character_set("utf-8")
 
 ulong m_ConnectCount = 0;
-//¶¨ÒåÈ«¾ÖÍ¨ĞÅ¶ÔÏó
+//å®šä¹‰å…¨å±€é€šä¿¡å¯¹è±¡
 IOCPServer* g_IOCPServer = NULL;
 
-//¶¨ÒåÈ«¾ÖÎÄ¼şÅäÖÃ¶ÔÏó
+//å®šä¹‰å…¨å±€æ–‡ä»¶é…ç½®å¯¹è±¡
 ConfigFile g_ConfigFile;
 
 
@@ -41,18 +41,18 @@ Remote::~Remote()
 
 void Remote::initListWidget()
 {
-	m_TableWidget_Online->setSelectionBehavior(QAbstractItemView::SelectRows);//ÕûĞĞÑ¡ÖĞµÄ·½Ê½
-	m_TableWidget_Online->setEditTriggers(QAbstractItemView::NoEditTriggers);//½ûÖ¹ĞŞ¸Ä
-	m_TableWidget_Online->setSelectionMode(QAbstractItemView::ContiguousSelection);//¿ÉÒÔ¶àÑ¡ĞĞ
+	m_TableWidget_Online->setSelectionBehavior(QAbstractItemView::SelectRows);//æ•´è¡Œé€‰ä¸­çš„æ–¹å¼
+	m_TableWidget_Online->setEditTriggers(QAbstractItemView::NoEditTriggers);//ç¦æ­¢ä¿®æ”¹
+	m_TableWidget_Online->setSelectionMode(QAbstractItemView::ContiguousSelection);//å¯ä»¥å¤šé€‰è¡Œ
 	m_TableWidget_Online->setContextMenuPolicy(Qt::CustomContextMenu);
 	connect(m_TableWidget_Online, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(onCreateTableWidgetMenu()));
 	QTableWidgetItem* m_pCurrentItem = NULL;
 
 
 
-	m_TableWidget_Message->setSelectionBehavior(QAbstractItemView::SelectRows);//ÕûĞĞÑ¡ÖĞµÄ·½Ê½
-	m_TableWidget_Message->setEditTriggers(QAbstractItemView::NoEditTriggers);//½ûÖ¹ĞŞ¸Ä
-	m_TableWidget_Message->setSelectionMode(QAbstractItemView::SingleSelection);//¿ÉÒÔÑ¡ÖĞµ¥¸ö
+	m_TableWidget_Message->setSelectionBehavior(QAbstractItemView::SelectRows);//æ•´è¡Œé€‰ä¸­çš„æ–¹å¼
+	m_TableWidget_Message->setEditTriggers(QAbstractItemView::NoEditTriggers);//ç¦æ­¢ä¿®æ”¹
+	m_TableWidget_Message->setSelectionMode(QAbstractItemView::SingleSelection);//å¯ä»¥é€‰ä¸­å•ä¸ª
 
 	initTableHeader();
 }
@@ -62,21 +62,21 @@ void Remote::initTableHeader()
 	m_TableWidget_Message->setColumnCount(3);
 
 	QStringList horizonHeader;
-	horizonHeader << QString("IPµØÖ·");
-	horizonHeader << QString("ÇøÓò");
-	horizonHeader << QString("¼ÆËã»úÃû/±¸×¢");
-	horizonHeader << QString("²Ù×÷ÏµÍ³");
+	horizonHeader << QString("IPåœ°å€");
+	horizonHeader << QString("åŒºåŸŸ");
+	horizonHeader << QString("è®¡ç®—æœºå/å¤‡æ³¨");
+	horizonHeader << QString("æ“ä½œç³»ç»Ÿ");
 	horizonHeader << QString("CPU");
-	horizonHeader << QString("ÉãÏñÍ·");
+	horizonHeader << QString("æ‘„åƒå¤´");
 	horizonHeader << QString("PING");
 	m_TableWidget_Online->setHorizontalHeaderLabels(horizonHeader);
 	m_TableWidget_Online->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
 	horizonHeader.clear();
 
-	horizonHeader << QString("ĞÅÏ¢ÀàĞÍ");
-	horizonHeader << QString("Ê±¼ä");
-	horizonHeader << QString("ĞÅÏ¢ÄÚÈİ");
+	horizonHeader << QString("ä¿¡æ¯ç±»å‹");
+	horizonHeader << QString("æ—¶é—´");
+	horizonHeader << QString("ä¿¡æ¯å†…å®¹");
 
 	m_TableWidget_Message->setHorizontalHeaderLabels(horizonHeader);
 	m_TableWidget_Message->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -93,8 +93,8 @@ void Remote::ServerStart()
 	{
 
 	}
-	//´°¿Ú½çÃæÏÔÊ¾Í¨ĞÅ¶ÔÏóÒÑ¾­Æô¶¯
-	ShowDialogMessage(true, QString("¼àÌı¶Ë¿Ú£º%1³É¹¦").arg(m_ListenPort));
+	//çª—å£ç•Œé¢æ˜¾ç¤ºé€šä¿¡å¯¹è±¡å·²ç»å¯åŠ¨
+	ShowDialogMessage(true, QString("ç›‘å¬ç«¯å£ï¼š%1æˆåŠŸ").arg(m_ListenPort));
 
 }
 
@@ -102,15 +102,15 @@ void Remote::onCreateServerSetWidget()
 {
 	m_Widget_Server_Set = new WidgetServerSet(this);
 
-	m_Widget_Server_Set->setWindowModality(Qt::ApplicationModal); //ÉèÖÃ×èÈûÀàĞÍ
-	//configWindow->setAttribute(Qt::WA_ShowModal, true);    //ÊôĞÔÉèÖÃ true:Ä£Ì¬ false:·ÇÄ£Ì¬
-	m_Widget_Server_Set->setWindowFlags(Qt::WindowMinMaxButtonsHint | Qt::WindowCloseButtonHint | Qt::Dialog);   //ÕâÀïÈç¹û²»ÉèÖÃQt::Dialog²ÎÊı£¬Ä£Ì¬ÏÔÊ¾»á²»ÉúĞ§
+	m_Widget_Server_Set->setWindowModality(Qt::ApplicationModal); //è®¾ç½®é˜»å¡ç±»å‹
+	//configWindow->setAttribute(Qt::WA_ShowModal, true);    //å±æ€§è®¾ç½® true:æ¨¡æ€ false:éæ¨¡æ€
+	m_Widget_Server_Set->setWindowFlags(Qt::WindowMinMaxButtonsHint | Qt::WindowCloseButtonHint | Qt::Dialog);   //è¿™é‡Œå¦‚æœä¸è®¾ç½®Qt::Dialogå‚æ•°ï¼Œæ¨¡æ€æ˜¾ç¤ºä¼šä¸ç”Ÿæ•ˆ
 
 	m_Widget_Server_Set->show();
 }
 void Remote::onTableWidgetSelectChanged()
 {
-	//todo µ±Êó±êµã»÷¿Õ°×µØ·½µÄÊ±ºòÈ¡ÏûtablewidgetÖĞĞĞµÄÑ¡ÖĞ£¬µ«ÊÇÄ¿Ç°»¹´æÔÚÎÊÌâ
+	//todo å½“é¼ æ ‡ç‚¹å‡»ç©ºç™½åœ°æ–¹çš„æ—¶å€™å–æ¶ˆtablewidgetä¸­è¡Œçš„é€‰ä¸­ï¼Œä½†æ˜¯ç›®å‰è¿˜å­˜åœ¨é—®é¢˜
 	int columnNum = m_TableWidget_Online->columnCount();
 	for (int i = 0; i < (m_TableWidget_Online->selectedItems().size())/ columnNum; i++)
 	{
@@ -124,14 +124,14 @@ void Remote::onTableWidgetSelectChanged()
 void Remote::onCreateTableWidgetMenu()
 {
 	QMenu menu; 
-	QAction* disConnect = menu.addAction(QString("É¾³ıÁ¬½Ó"));
+	QAction* disConnect = menu.addAction(QString("åˆ é™¤è¿æ¥"));
 	//menu.addSeparator();
-	QAction* reMessage = menu.addAction(QString("¼´Ê±ÏûÏ¢"));
-	QAction* shutDown = menu.addAction(QString("Ô¶³Ì¹Ø»ú"));
+	QAction* reMessage = menu.addAction(QString("å³æ—¶æ¶ˆæ¯"));
+	QAction* shutDown = menu.addAction(QString("è¿œç¨‹å…³æœº"));
 
 	connect(disConnect, SIGNAL(triggered()), this, SLOT(onTableWidgetMenuDisConnect()));
 
-	if (m_TableWidget_Online->selectedItems().count() == 0)    //Èç¹ûÃ»Ñ¡ÖĞÈÎºÎĞĞ
+	if (m_TableWidget_Online->selectedItems().count() == 0)    //å¦‚æœæ²¡é€‰ä¸­ä»»ä½•è¡Œ
 	{
 		menu.setDisabled(true);
 	}
@@ -139,17 +139,17 @@ void Remote::onCreateTableWidgetMenu()
 }
 void Remote::onTableWidgetMenuDisConnect()
 {
-	//ÕâÀïÑĞ¾¿Ò»ÏÂ±í¸ñµÄÕûĞĞ²Ù×÷£¡£¡£¡£¡
+	//è¿™é‡Œç ”ç©¶ä¸€ä¸‹è¡¨æ ¼çš„æ•´è¡Œæ“ä½œï¼ï¼ï¼ï¼
 	int columnCount = m_TableWidget_Online->columnCount();
 	int slectedcItemCount = m_TableWidget_Online->selectedItems().count();
 	int selectedRowCount = slectedcItemCount / columnCount;
-	int currentRow = m_TableWidget_Online->currentRow();         //ÕâÀïÖ»ĞèÒª»ñµÃÑ¡ÖĞÁË¼¸ĞĞ£¬µÚÒ»ĞĞÊÇ¶àÉÙ£¬ÒòÎªÑ¡ÖĞµÄ¶¼ÊÇÁ¬ĞøµÄĞĞ
+	int currentRow = m_TableWidget_Online->currentRow();         //è¿™é‡Œåªéœ€è¦è·å¾—é€‰ä¸­äº†å‡ è¡Œï¼Œç¬¬ä¸€è¡Œæ˜¯å¤šå°‘ï¼Œå› ä¸ºé€‰ä¸­çš„éƒ½æ˜¯è¿ç»­çš„è¡Œ
 	QString ClientAddressData;
 	
 	for (int i = 0; i < selectedRowCount; i++)
 	{
-		ClientAddressData = m_TableWidget_Online->item(currentRow, 0)->text();    //Êä³öÃ¿Ò»ĞĞÀïµÄµÚÒ»ÁĞ
-		ClientAddressData += QString("Ç¿ÖÆ¶Ï¿ª");
+		ClientAddressData = m_TableWidget_Online->item(currentRow, 0)->text();    //è¾“å‡ºæ¯ä¸€è¡Œé‡Œçš„ç¬¬ä¸€åˆ—
+		ClientAddressData += QString("å¼ºåˆ¶æ–­å¼€");
 		m_TableWidget_Online->removeRow(currentRow);
 		ShowDialogMessage(true, ClientAddressData);
 	}
@@ -169,42 +169,42 @@ void Remote::ShowDialogMessage(bool IsOk, QString Message)
 	v2 = Time.toString();
 	if (IsOk)
 	{
-		v1 = "Ö´ĞĞ³É¹¦";
+		v1 = "æ‰§è¡ŒæˆåŠŸ";
 	}
 	else
 	{
-		v1 = "Ö´ĞĞÊ§°Ü";
+		v1 = "æ‰§è¡Œå¤±è´¥";
 	}
 
 	int RowCont;
 	RowCont = m_TableWidget_Message->rowCount();
-	m_TableWidget_Message->insertRow(RowCont);//Ôö¼ÓÒ»ĞĞ
+	m_TableWidget_Message->insertRow(RowCont);//å¢åŠ ä¸€è¡Œ
 
 	m_TableWidget_Message->setItem(RowCont, 0, new QTableWidgetItem(v1));
 	m_TableWidget_Message->setItem(RowCont, 1, new QTableWidgetItem(v2));
 	m_TableWidget_Message->setItem(RowCont, 2, new QTableWidgetItem(Message));
 
 
-	if (Message.contains("ÉÏÏß") > 0)
+	if (Message.contains("ä¸Šçº¿") > 0)
 	{
 		m_ConnectCount++;
 	}
-	else if (Message.contains("ÏÂÏß") > 0)
+	else if (Message.contains("ä¸‹çº¿") > 0)
 	{
 		m_ConnectCount--;
 	}
-	else if (Message.contains("¶Ï¿ª") > 0)
+	else if (Message.contains("æ–­å¼€") > 0)
 	{
 		m_ConnectCount--;
 	}
 	m_ConnectCount = m_ConnectCount < 0 ? 0 : m_ConnectCount;
-	v3 = QString("ÓĞ%1¸öÖ÷»úÔÚÏß").arg(m_ConnectCount);
+	v3 = QString("æœ‰%1ä¸ªä¸»æœºåœ¨çº¿").arg(m_ConnectCount);
 
 	m_StatusBar_Label->setText(v3);
 }
 void Remote::initMenu()
 {
-	//todo  Èı¸ö¸ö°´Å¥
+	//todo  ä¸‰ä¸ªä¸ªæŒ‰é’®
 
 	connect(m_Menu_Server_Set, SIGNAL(triggered()), this, SLOT(onCreateServerSetWidget()));
 	connect(m_Menu_Server_Exit, SIGNAL(triggered()), this, SLOT(close()));
@@ -224,7 +224,7 @@ void Remote::onAddTest()
 
 	int RowCont;
 	RowCont = m_TableWidget_Online->rowCount();
-	m_TableWidget_Online->insertRow(RowCont);//Ôö¼ÓÒ»ĞĞ
+	m_TableWidget_Online->insertRow(RowCont);//å¢åŠ ä¸€è¡Œ
 
 	m_TableWidget_Online->setItem(RowCont, 0, item1);
 	m_TableWidget_Online->setItem(RowCont, 1, item2);
@@ -242,19 +242,19 @@ void Remote::initToolBar()
 {
 	m_ToolBar->setIconSize(QSize(48, 48));
 
-	QAction* ToolBarButton_CMD_MANAGER = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_0") ,"ÖÕ¶Ë¿ØÖÆ");
-	QAction* ToolBarButton_PROCESS_MANAGER = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_1"), "½ø³Ì¹ÜÀí");
-	QAction* ToolBarButton_WINDOW_MANAGER = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_2"), "´°¿Ú¹ÜÀí");
-	QAction* ToolBarButton_REMOTE_CONTROL = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_3"), "×ÀÃæ¹ÜÀí");
-	QAction* ToolBarButton_FILE_MANAGER = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_4"), "ÎÄ¼ş¹ÜÀí");
-	QAction* ToolBarButton_AUDIO_MANAGER = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_5"), "ÓïÒô¹ÜÀí");
-	QAction* ToolBarButton_CLEAN_MANAGER = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_6"), "ÏµÍ³ÇåÀí");
-	QAction* ToolBarButton_VIDEO_MANAGER = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_7"), "ÊÓÆµ¹ÜÀí");
-	QAction* ToolBarButton_SERVICE_MANAGER = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_8"), "·şÎñ¹ÜÀí");
-	QAction* ToolBarButton_REGISTER_MANAGER = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_9"), "×¢²á±í¹ÜÀí");
-	QAction* ToolBarButton_SERVER_MANAGER = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_10"), "·şÎñ¶ËÉèÖÃ");
-	QAction* ToolBarButton_CLIENT_CLIENT = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_11"), "¿Í»§¶ËÉèÖÃ");
-	QAction* ToolBarButton_SERVER_ABOUT = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_12"), "°ïÖú");
+	QAction* ToolBarButton_CMD_MANAGER = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_0") ,"ç»ˆç«¯æ§åˆ¶");
+	QAction* ToolBarButton_PROCESS_MANAGER = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_1"), "è¿›ç¨‹ç®¡ç†");
+	QAction* ToolBarButton_WINDOW_MANAGER = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_2"), "çª—å£ç®¡ç†");
+	QAction* ToolBarButton_REMOTE_CONTROL = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_3"), "æ¡Œé¢ç®¡ç†");
+	QAction* ToolBarButton_FILE_MANAGER = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_4"), "æ–‡ä»¶ç®¡ç†");
+	QAction* ToolBarButton_AUDIO_MANAGER = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_5"), "è¯­éŸ³ç®¡ç†");
+	QAction* ToolBarButton_CLEAN_MANAGER = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_6"), "ç³»ç»Ÿæ¸…ç†");
+	QAction* ToolBarButton_VIDEO_MANAGER = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_7"), "è§†é¢‘ç®¡ç†");
+	QAction* ToolBarButton_SERVICE_MANAGER = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_8"), "æœåŠ¡ç®¡ç†");
+	QAction* ToolBarButton_REGISTER_MANAGER = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_9"), "æ³¨å†Œè¡¨ç®¡ç†");
+	QAction* ToolBarButton_SERVER_MANAGER = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_10"), "æœåŠ¡ç«¯è®¾ç½®");
+	QAction* ToolBarButton_CLIENT_CLIENT = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_11"), "å®¢æˆ·ç«¯è®¾ç½®");
+	QAction* ToolBarButton_SERVER_ABOUT = m_ToolBar->addAction(QIcon(".\\PicRes\\ToolBar_12"), "å¸®åŠ©");
 
 	//todo  connect
 	connect(ToolBarButton_CMD_MANAGER, SIGNAL(triggered()), this, SLOT(onToolButtonCmdManager()));
@@ -322,12 +322,12 @@ void Remote::onToolButtonServerAbout()
 }
 void Remote::initStatusBar()
 {
-	m_StatusBar->setStyleSheet(QString("QStatusBar::item{border: 0px}")); // ÉèÖÃ²»ÏÔÊ¾labelµÄ±ß¿ò
+	m_StatusBar->setStyleSheet(QString("QStatusBar::item{border: 0px}")); // è®¾ç½®ä¸æ˜¾ç¤ºlabelçš„è¾¹æ¡†
 	m_StatusBar_Label = new QLabel("Welcome");
-	m_StatusBar->addWidget(m_StatusBar_Label);        //Èç¹û²»²ÉÓÃ´´½¨LabelµÄ·½·¨¶ø²ÉÓÃshowMessage£¬µã»÷²Ëµ¥Ê±statusbarÉÏµÄÏûÏ¢»áÏûÊ§
-	//m_StatusBar->addPermanentWidget(nullptr);//ÓÀ¾ÃĞÅÏ¢´°¿Ú - ²»»á±»Ò»°ãÏûÏ¢¸²¸Ç
-	//m_StatusBar->addWidget(nullptr);//Õı³£ĞÅÏ¢´°¿Ú - »á±»showMessage()µÄÏûÏ¢¸²¸Ç
-	m_StatusBar->setSizeGripEnabled(false);//È¥µô×´Ì¬À¸ÓÒÏÂ½ÇµÄÈı½Ç
+	m_StatusBar->addWidget(m_StatusBar_Label);        //å¦‚æœä¸é‡‡ç”¨åˆ›å»ºLabelçš„æ–¹æ³•è€Œé‡‡ç”¨showMessageï¼Œç‚¹å‡»èœå•æ—¶statusbarä¸Šçš„æ¶ˆæ¯ä¼šæ¶ˆå¤±
+	//m_StatusBar->addPermanentWidget(nullptr);//æ°¸ä¹…ä¿¡æ¯çª—å£ - ä¸ä¼šè¢«ä¸€èˆ¬æ¶ˆæ¯è¦†ç›–
+	//m_StatusBar->addWidget(nullptr);//æ­£å¸¸ä¿¡æ¯çª—å£ - ä¼šè¢«showMessage()çš„æ¶ˆæ¯è¦†ç›–
+	m_StatusBar->setSizeGripEnabled(false);//å»æ‰çŠ¶æ€æ å³ä¸‹è§’çš„ä¸‰è§’
 
 }
 void Remote::initChildPointer()
@@ -359,8 +359,8 @@ void Remote::CreateSystemTrayIconAndMenu()
 	connect(m_SystemTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(onActiveSystemTrayIcon(QSystemTrayIcon::ActivationReason)));
 
 	m_TrayMenu = new QMenu(this);
-	QAction* trayMenuAction_show = new QAction("ÏÔÊ¾", m_TrayMenu);
-	QAction* trayMenuAction_exit = new QAction("ÍË³ö", m_TrayMenu);
+	QAction* trayMenuAction_show = new QAction("æ˜¾ç¤º", m_TrayMenu);
+	QAction* trayMenuAction_exit = new QAction("é€€å‡º", m_TrayMenu);
 
 	m_TrayMenu->addAction(trayMenuAction_show);
 	m_TrayMenu->addAction(trayMenuAction_exit);
@@ -374,7 +374,7 @@ void Remote::CreateSystemTrayIconAndMenu()
 		this->close();
 		});
 
-	m_SystemTrayIcon->setContextMenu(m_TrayMenu); // ÉèÖÃÓÒ¼ü²Ëµ¥
+	m_SystemTrayIcon->setContextMenu(m_TrayMenu); // è®¾ç½®å³é”®èœå•
 
 	m_SystemTrayIcon->show();
 }
@@ -383,7 +383,7 @@ void Remote::closeEvent(QCloseEvent* event)
 {
 	if (!isClickFromTrayMenu)
 	{
-		QMessageBox::StandardButton button = QMessageBox::question(this, "ÌáÊ¾", "ÊÇ·ñ×îĞ¡»¯µ½ÍĞÅÌ£¿", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+		QMessageBox::StandardButton button = QMessageBox::question(this, "æç¤º", "æ˜¯å¦æœ€å°åŒ–åˆ°æ‰˜ç›˜ï¼Ÿ", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
 		if (button == QMessageBox::Yes)
 		{
 			event->ignore();

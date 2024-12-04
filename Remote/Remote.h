@@ -5,11 +5,11 @@
 #include <map>
 #include <qdatetime.h>
 #include <qdebug.h>
-#include <QDesktopServices> //×ÀÃæÊÂ¼şÀà
+#include <QDesktopServices> //æ¡Œé¢äº‹ä»¶ç±»
 #include <qevent.h>
 #include <QMessageBox>
 #include <qstandarditemmodel.h>
-#include <QSystemTrayIcon>  //tÍĞÅÌÀà
+#include <QSystemTrayIcon>  //tæ‰˜ç›˜ç±»
 #include <qtablewidget.h>
 #include <qtextcodec.h>
 #include <QtWidgets/QMainWindow>

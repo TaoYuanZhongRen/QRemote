@@ -9,7 +9,7 @@ const unsigned long PACKET_LENGTH = 0x2000;
 
 typedef struct CONTEXT_OBJECT
 {
-	SOCKET ClientSocket;        //µ±Ç°serverÊ¹ÓÃ¸ÃÌ×½Ó×ÖÓëÄ¿±ê¿Í»§¶ËÍ¨ĞÅ
+	SOCKET ClientSocket;        //å½“å‰serverä½¿ç”¨è¯¥å¥—æ¥å­—ä¸ç›®æ ‡å®¢æˆ·ç«¯é€šä¿¡
 	WSABUF RecvWsaBuffer;
 	char BufferData[PACKET_LENGTH];
 
@@ -55,7 +55,7 @@ public:
 public:
 	bool ServerRun(unsigned short ListenPort);
 
-	static DWORD WINAPI ListenThreadProcedure(LPVOID ParameterData /*LPVOID ÕâÀïµÄLÖ¸µÄÊÇÏà¶ÔÓÚ16Î»£¬ËùÒÔÕâ¸öÀàĞÍÊÇÖ¸32Î»µÄ·ºĞÍÖ¸Õë*/);
+	static DWORD WINAPI ListenThreadProcedure(LPVOID ParameterData /*LPVOID è¿™é‡Œçš„LæŒ‡çš„æ˜¯ç›¸å¯¹äº16ä½ï¼Œæ‰€ä»¥è¿™ä¸ªç±»å‹æ˜¯æŒ‡32ä½çš„æ³›å‹æŒ‡é’ˆ*/);
 
 	void OnAccept();
 	void PostRecv(PCONTEXT_OBJECT ContextObject);
@@ -67,13 +67,13 @@ public:
 private:
 	SOCKET m_ListenSocket;
 	HANDLE m_ListenThreadHandle;
-	HANDLE m_ListenEventHandle;         //¼àÌıÊÂ¼ş
-	HANDLE m_KillEventHandle;               //¼àÌıÏß³ÌÍË³ö
-	CRITICAL_SECTION m_CriticalSection;  //ÁÙ½çÇø
+	HANDLE m_ListenEventHandle;         //ç›‘å¬äº‹ä»¶
+	HANDLE m_KillEventHandle;               //ç›‘å¬çº¿ç¨‹é€€å‡º
+	CRITICAL_SECTION m_CriticalSection;  //ä¸´ç•ŒåŒº
 	HANDLE m_CompletionPortHandle;
-	CONTEXT_OBJECT_LIST m_FreeContextObjectList;      //ÄÚ´æ³ØÁ´±í
-	CONTEXT_OBJECT_LIST m_ConnectionContextObjectList;      //ÉÏÏßÓÃ»§
-	unsigned int m_KeepAliveTime;                          //±£»î»úÖÆ
+	CONTEXT_OBJECT_LIST m_FreeContextObjectList;      //å†…å­˜æ± é“¾è¡¨
+	CONTEXT_OBJECT_LIST m_ConnectionContextObjectList;      //ä¸Šçº¿ç”¨æˆ·
+	unsigned int m_KeepAliveTime;                          //ä¿æ´»æœºåˆ¶
 };
 
 

@@ -13,35 +13,35 @@ ConfigFile::~ConfigFile()
 bool ConfigFile::initConfigFile()
 {
 	CHAR FileFullPath[MAX_PATH] = { 0 };
-	GetModuleFileNameA(NULL, FileFullPath, MAX_PATH);     //»ñµÃµ±Ç°¿ÉÖ´ĞĞÎÄ¼şµÄ¾ø¶ÔÂ·¾¶
+	GetModuleFileNameA(NULL, FileFullPath, MAX_PATH);     //è·å¾—å½“å‰å¯æ‰§è¡Œæ–‡ä»¶çš„ç»å¯¹è·¯å¾„
 
 	CHAR* v1 = NULL;
 	v1 = strstr(FileFullPath, ".");
 	if (v1 != NULL)
 	{
 		*v1 = '\0';
-		strcat(FileFullPath, ".ini");    //ÄÃµ½ÅäÖÃÎÄ¼şÂ·¾¶
+		strcat(FileFullPath, ".ini");    //æ‹¿åˆ°é…ç½®æ–‡ä»¶è·¯å¾„
 	}
 
 	m_FileFullPath = FileFullPath;
-	//´´½¨Ò»¸öiniÎÄ¼ş
+	//åˆ›å»ºä¸€ä¸ªiniæ–‡ä»¶
 	QSettings configini(m_FileFullPath.c_str() , QSettings::IniFormat);
-	//ÉèÖÃÎÄ¼ş±àÂë£¬ÅäÖÃÎÄ¼şÖĞÊ¹ÓÃÖĞÎÄÊ±£¬ÕâÊÇ±ØĞëµÄ£¬·ñÔòÂÒÂë
+	//è®¾ç½®æ–‡ä»¶ç¼–ç ï¼Œé…ç½®æ–‡ä»¶ä¸­ä½¿ç”¨ä¸­æ–‡æ—¶ï¼Œè¿™æ˜¯å¿…é¡»çš„ï¼Œå¦åˆ™ä¹±ç 
 	//configini.setIniCodec(QTextCodec::codecForName("UTF-8"));
 
 	
 
 	if (QFile::exists(m_FileFullPath.c_str()))
-	{	// ÎÄ¼ş´æÔÚ£¬¶Á³öÅäÖÃÏî
+	{	// æ–‡ä»¶å­˜åœ¨ï¼Œè¯»å‡ºé…ç½®é¡¹
 		return false;
 	}
 	else 
 	{
-		// ÎÄ¼ş²»´æÔÚ£¬Ğ´ÈëÅäÖÃÏî£¬Éú³ÉÅäÖÃÎÄ¼ş
+		// æ–‡ä»¶ä¸å­˜åœ¨ï¼Œå†™å…¥é…ç½®é¡¹ï¼Œç”Ÿæˆé…ç½®æ–‡ä»¶
 		configini.setValue("Settings/ListenPort", "2356");
 		configini.setValue("Settings/MaxConnection", "10");
-		// setValueÖ»ÊÇ°ÑÅäÖÃÏîĞ´ÈëÁË»º³åÇø£¬ÈôÒªĞ´ÈëÎÄ¼ş£¬»¹ĞèÖ´ĞĞÍ¬²½
-		// ²»Í¬²½£¬ÎŞ·¨Ğ´ÈëÎÄ¼ş£¬ÎŞ·¨Éú³ÉÎÄ¼ş
+		// setValueåªæ˜¯æŠŠé…ç½®é¡¹å†™å…¥äº†ç¼“å†²åŒºï¼Œè‹¥è¦å†™å…¥æ–‡ä»¶ï¼Œè¿˜éœ€æ‰§è¡ŒåŒæ­¥
+		// ä¸åŒæ­¥ï¼Œæ— æ³•å†™å…¥æ–‡ä»¶ï¼Œæ— æ³•ç”Ÿæˆæ–‡ä»¶
 		configini.sync();
 	}
 
@@ -49,16 +49,16 @@ bool ConfigFile::initConfigFile()
 
 
 
-	//HANDLE FileHandle = CreateFileA(FileFullPath, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_DELETE,   //¶ÀÕ¼
-	//	NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_ARCHIVE | FILE_ATTRIBUTE_HIDDEN, NULL);      //Í¬²½Òì²½
+	//HANDLE FileHandle = CreateFileA(FileFullPath, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_DELETE,   //ç‹¬å 
+	//	NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_ARCHIVE | FILE_ATTRIBUTE_HIDDEN, NULL);      //åŒæ­¥å¼‚æ­¥
 
 	//if (FileHandle == INVALID_HANDLE_VALUE)
 	//{
 	//	return false;
 	//}
 	//m_FileFullPath = FileFullPath;
-	//LARGE_INTEGER FileSize;               //¶¨ÒåÒ»¸ö½á¹¹Ìå
-	//GetFileSizeEx(FileHandle, &FileSize);    //Õâ¸öº¯Êı¿ÉÒÔ¶ÁÈ¡´óÓÚ4GµÄÎÄ¼ş´óĞ¡
+	//LARGE_INTEGER FileSize;               //å®šä¹‰ä¸€ä¸ªç»“æ„ä½“
+	//GetFileSizeEx(FileHandle, &FileSize);    //è¿™ä¸ªå‡½æ•°å¯ä»¥è¯»å–å¤§äº4Gçš„æ–‡ä»¶å¤§å°
 	//if (FileSize.QuadPart > 0)
 	//{
 	//	CloseHandle(FileHandle);
@@ -86,6 +86,6 @@ void ConfigFile::SetInt(QString MainKey, QString SubKey, unsigned int BufferData
 	QSettings configini(m_FileFullPath.c_str(), QSettings::IniFormat);
 	configini.beginGroup(MainKey);
 	configini.setValue(SubKey, BufferData);
-	configini.sync();//Ğ´ÈëÅäÖÃÎÄ¼ş
+	configini.sync();//å†™å…¥é…ç½®æ–‡ä»¶
 	configini.endGroup();
 }

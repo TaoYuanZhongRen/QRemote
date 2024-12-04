@@ -14,6 +14,6 @@ public:
 	void SetInt(QString MainKey, QString SubKey, unsigned int BufferData);
 
 private:
-	std::string m_FileFullPath;       //ÅäÖÃÎÄ¼şµÄ¾ø¶ÔÂ·¾¶
+	std::string m_FileFullPath;       //é…ç½®æ–‡ä»¶çš„ç»å¯¹è·¯å¾„
 };
 
